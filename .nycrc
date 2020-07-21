@@ -1,0 +1,8 @@
+{
+  "include": ["target/**"],
+  "reporter": ["lcov", "text-summary"],
+  "sourceMap": true,
+  "instrument": true,
+  "cache": false,
+  "all": false
+}

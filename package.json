@@ -1,0 +1,31 @@
+{
+  "name": "fetch_courses",
+  "version": "1.0.0",
+  "description": "Asynchronous batch processing for gatech course data",
+  "main": "target/index.js",
+  "scripts": {
+    "start": "tsc && node ./target/index.js",
+    "dev": "ts-node-dev index.ts",
+    "build": "rm -rf target && tsc",
+    "test": "nyc ava",
+    "tsc": "tsc",
+    "bld:test": "npm run build && npm run test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@types/isomorphic-fetch": "0.0.35",
+    "isomorphic-fetch": "^2.2.1"
+  },
+  "devDependencies": {
+    "@ava/babel": "^1.0.1",
+    "@types/sinon": "^9.0.4",
+    "ava": "^3.10.1",
+    "nyc": "^15.1.0",
+    "sinon": "^9.0.2",
+    "ts-node-dev": "^1.0.0-pre.52",
+    "typescript": "^3.9.7"
+  }
+}

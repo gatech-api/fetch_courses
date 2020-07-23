@@ -15,7 +15,12 @@ class TermService {
     }
 
     _daysBetween(start: Date, end: Date): number {
-        return Math.round((end.getTime() - start.getTime())/1000 * 60 * 60 * 24);
+        if(end.getTime() < start.getTime()) {
+            return Number.MAX_VALUE;
+        }
+        else {
+            return Math.round((end.getTime() - start.getTime())/1000 * 60 * 60 * 24);
+        }
     }
 
     _filterToCurrentTerm(allTerms: Array<string>): string {

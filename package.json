@@ -4,8 +4,7 @@
   "description": "Asynchronous batch processing for gatech course data",
   "main": "target/index.js",
   "scripts": {
-    "start": "tsc && node ./target/index.js",
-    "dev": "ts-node-dev index.ts",
+    "start": "npm run build && node ./target/index.js",
     "build": "rm -rf target && tsc",
     "test": "nyc ava",
     "tsc": "tsc",
@@ -25,7 +24,6 @@
     "ava": "^3.10.1",
     "nyc": "^15.1.0",
     "sinon": "^9.0.2",
-    "ts-node-dev": "^1.0.0-pre.52",
     "typescript": "^3.9.7"
   }
 }

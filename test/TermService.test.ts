@@ -9,6 +9,7 @@ sinon.useFakeTimers(new Date(2020, 8, 1));
 
 let VALID_TERM: string = "202008";
 let INVALID_TERM: string = "999999";
+let PAST_TERM: string = "199901";
 
 test.beforeEach(() => {
     termService = new TermService();
@@ -50,4 +51,15 @@ test('TermService should throw error for empty api response', async t => {
 
     //Then
     t.is(error.message, "No terms returned from api");
+})
+
+test('TermService should deprioritize enrollment terms in the past', async t => {
+    //Given
+    getTermsPromiseStub.resolves(`<OPTION VALUE="${PAST_TERM}">\n<OPTION VALUE="${VALID_TERM}">`);
+
+    //When
+    let actual: string = await termService.getCurrentTerm();
+
+    //Then
+    t.is(actual, VALID_TERM);
 })

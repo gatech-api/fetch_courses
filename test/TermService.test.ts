@@ -13,7 +13,7 @@ const PAST_TERM: string = "199901";
 
 test.beforeEach(() => {
     termService = new TermService();
-    getTermsPromiseStub = sinon.stub(termService, "_getTermsPromise");
+    getTermsPromiseStub = sinon.stub(termService, <any>"_getTermsPromise");
 })
 
 test('TermService should apply regex correctly for valid term', async t => {

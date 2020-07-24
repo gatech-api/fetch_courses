@@ -1,3 +1,4 @@
+require('dotenv').config();
 import TermService from './src/TermService.js'
 import CourseService from "./src/CourseService.js";
 import CourseAcquisitionUtility from "./src/CourseAcquisitionUtility.js";

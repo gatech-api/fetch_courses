@@ -15,7 +15,7 @@ class CourseAcquisitionUtility {
      * @param   {RegExp}        regexp      Regular expression (match must be group 1).
      * @return  {string}                    Match string if found, otherwise empty string.
      */
-    _conditionalMatch(html: string, regexp: RegExp): string {
+    private _conditionalMatch(html: string, regexp: RegExp): string {
         let match: string | undefined = html.matchAll(regexp).next().value;
         return match ? match[1] : "";
     }
@@ -35,7 +35,7 @@ class CourseAcquisitionUtility {
      * @param   {string}        headerElement   Raw html of course header.
      * @return  {Array<string>}                 Array of string representing header values.
      */
-    _acquireHeaderData(headerElement: string): Array<string> {
+    private _acquireHeaderData(headerElement: string): Array<string> {
         const header: string = headerElement.matchAll(/crn_in=\d+">(.*)<\/a>/g).next().value[1];
         const sectionIndex: number = header.lastIndexOf(this.SEPARATOR);
         const codeIndex: number = header.slice(0, sectionIndex).lastIndexOf(this.SEPARATOR);
@@ -57,7 +57,7 @@ class CourseAcquisitionUtility {
      * @param   {string}        bodyElement     Raw html of course body.
      * @return  {Array<string>}                 Array of string representing body values.
      */
-    _acquireBodyData(bodyElement: string): Array<string> {
+    private _acquireBodyData(bodyElement: string): Array<string> {
         const bodyAttributes: IterableIterator<RegExpMatchArray> = bodyElement.matchAll(/^<SPAN class="fieldlabeltext">(.*): <\/SPAN>(.+)$/gm);
 
         let matchingAttributes: Record<string, string> = {};
@@ -90,7 +90,7 @@ class CourseAcquisitionUtility {
      * @param   {Array<string>} tableElements   Raw html of course metadata.
      * @return  {Array<Class>}                  Array of Class.
      */
-    _acquireTableData(tableElements: Array<string>): Array<Class> {
+    private _acquireTableData(tableElements: Array<string>): Array<Class> {
         return tableElements.flatMap((tableElement: string) => {
             let [, classTime, classSchedule, classLocation, classDateRange, ,instructorName]: Array<string> = tableElement
                 .split('\n')
@@ -128,7 +128,7 @@ class CourseAcquisitionUtility {
      * @param   {string}                                    data    Raw course html.
      * @return  {Record<string, Record<string, Object>>}            Course Record.
      */
-    getAllCourses(data: string): Record<string, Record<string, Object>> {
+    public getAllCourses(data: string): Record<string, Record<string, Object>> {
         const leftBound: number = data.indexOf('<caption class="captiontext">Sections Found</caption>');
         const rightBound: number = data.lastIndexOf('<table  CLASS="datadisplaytable" summary="This is for formatting of the bottom links." WIDTH="50%">');
         const coursesRaw: Array<string> = data.slice(leftBound, rightBound).split('<tr>\n<th CLASS="ddtitle" scope="colgroup" >').slice(1);

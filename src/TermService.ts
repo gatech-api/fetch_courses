@@ -11,7 +11,7 @@ class TermService {
      * @access  private
      * @return  {Promise<string>}   Promise of terms raw html.
      */
-    async _getTermsPromise(): Promise<string> {
+    private async _getTermsPromise(): Promise<string> {
         let response: Response = await fetch(TERMS_CATALOG_URI);
         return response.text();
     }
@@ -24,7 +24,7 @@ class TermService {
      * @param   {string}    date    Date string formatted like YYYY-mm.
      * @return  {boolean}           Boolean representing validity of date.
      */
-    _dateIsValid(date: string): boolean {
+    private _dateIsValid(date: string): boolean {
         let month: number = parseInt(date.slice(4));
         return 1 <= month && month <= 12;
     }
@@ -38,7 +38,7 @@ class TermService {
      * @param   {Date}      end     End Date object.
      * @return  {number}            Number of days between two Dates (in order).
      */
-    _daysBetween(start: Date, end: Date): number {
+    private _daysBetween(start: Date, end: Date): number {
         if(end.getTime() < start.getTime()) {
             return Number.MAX_VALUE;
         }
@@ -57,7 +57,7 @@ class TermService {
      * @param   {Array<string>} allTerms    All terms returned from api.
      * @return  {string}                    Latest term.
      */
-    _filterToCurrentTerm(allTerms: Array<string>): string {
+    private _filterToCurrentTerm(allTerms: Array<string>): string {
         let currentDate: Date = new Date();
         let closestDateIndex: number = 0;
         let closestDateDiff: number = Number.MAX_VALUE;
@@ -85,7 +85,7 @@ class TermService {
      * @access  public
      * @return  {Promise<string>}   Promise of current term string.
      */
-    async getCurrentTerm(): Promise<string> {
+    public async getCurrentTerm(): Promise<string> {
         let termsRawHtml: string = await this._getTermsPromise();
 
         let matches: Array<RegExpMatchArray> = Array.from(termsRawHtml.matchAll(/<OPTION VALUE="(\d+)">/g));

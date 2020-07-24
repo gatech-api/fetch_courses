@@ -16,6 +16,8 @@
   "type": "module",
   "dependencies": {
     "@types/isomorphic-fetch": "0.0.35",
+    "backendless": "^6.0.6",
+    "dotenv": "^8.2.0",
     "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {

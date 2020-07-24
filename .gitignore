@@ -4,3 +4,4 @@ node_modules/
 target/
 .nyc_output/
 coverage/
+process.env

@@ -20,7 +20,7 @@ class CourseService {
      * @param   {string}            term    Term to get courses for.
      * @return  {Promise<string>}           Promise of courses raw html.
      */
-    async _getCoursesPromise(term: string): Promise<string> {
+    private async _getCoursesPromise(term: string): Promise<string> {
         let response: Response = await fetch(COURSE_URI, {
             method: "POST",
             headers: {
@@ -54,7 +54,7 @@ class CourseService {
      * @param   {string}    term    Term to create FormData for.
      * @return  {string}            Encoded Formdata body.
      */
-    _getFormData(term: string): string {
+    private _getFormData(term: string): string {
         let baseForm: Record<string, string> = {
             sel_subj: 'dummy',
             sel_day: 'dummy',
@@ -99,7 +99,7 @@ class CourseService {
      * @param   {string}                                            term    Term to get course Record for.
      * @return  {Promise<Record<string, Record<string, Object>>>}           Record Promise for all courses.
      */
-    async getCourses(term: string): Promise<Record<string, Record<string, Object>>> {
+    public async getCourses(term: string): Promise<Record<string, Record<string, Object>>> {
         let coursesRawHtml: string = await this._getCoursesPromise(term);
 
         return this.courseAcquisitionUtility.getAllCourses(coursesRawHtml);

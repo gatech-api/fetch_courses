@@ -16,7 +16,7 @@ class CourseAcquisitionUtility {
      * @return  {string}                    Match string if found, otherwise empty string.
      */
     _conditionalMatch(html: string, regexp: RegExp): string {
-        let match = html.matchAll(regexp).next().value;
+        let match: string | undefined = html.matchAll(regexp).next().value;
         return match ? match[1] : "";
     }
 
@@ -61,7 +61,7 @@ class CourseAcquisitionUtility {
         const bodyAttributes: IterableIterator<RegExpMatchArray> = bodyElement.matchAll(/^<SPAN class="fieldlabeltext">(.*): <\/SPAN>(.+)$/gm);
 
         let matchingAttributes: Record<string, string> = {};
-        let match = bodyAttributes.next();
+        let match: IteratorResult<RegExpMatchArray> = bodyAttributes.next();
         while(!match.done) {
             matchingAttributes[match.value[1]] = match.value[2]
                 .split(',')
@@ -92,7 +92,7 @@ class CourseAcquisitionUtility {
      */
     _acquireTableData(tableElements: Array<string>): Array<Class> {
         return tableElements.flatMap((tableElement: string) => {
-            let [, classTime, classSchedule, classLocation, classDateRange, ,instructorName] = tableElement
+            let [, classTime, classSchedule, classLocation, classDateRange, ,instructorName]: Array<string> = tableElement
                 .split('\n')
                 .slice(0, 7)
                 .flatMap((columnHtml: string) => columnHtml.replace(/<\/?[^>]+(>|$)/g, ''))
@@ -101,14 +101,14 @@ class CourseAcquisitionUtility {
                 .split(',')
                 .flatMap((name: string) => name.replace(/\(\w\)/g, '').replace(/\s\s+/g, ' ').trim()).join(',');
 
-            const emailMatches = tableElement.matchAll(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/g);
-            let emails = [];
-            let match = emailMatches.next();
+            const emailMatches: IterableIterator<RegExpMatchArray> = tableElement.matchAll(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/g);
+            let emails: Array<string> = [];
+            let match: IteratorResult<RegExpMatchArray> = emailMatches.next();
             while(!match.done) {
                 emails.push(match.value[1]);
                 match = emailMatches.next();
             }
-            const instructorEmail = emails.join(',');
+            const instructorEmail: string = emails.join(',');
             return new Class()
                 .setTime(classTime)
                 .setSchedule(classSchedule)
@@ -138,9 +138,9 @@ class CourseAcquisitionUtility {
         coursesRaw.forEach((course: string) => {
             const splitByTableRow: Array<string> = course.split('<tr>\n');
 
-            const [name, registrationNumber, code, section] = this._acquireHeaderData(splitByTableRow[0]);
-            const [attributes, gradeBasis, credits, campus, format] = this._acquireBodyData(splitByTableRow[1]);
-            const classes = this._acquireTableData(splitByTableRow.slice(3));
+            const [name, registrationNumber, code, section]: Array<string> = this._acquireHeaderData(splitByTableRow[0]);
+            const [attributes, gradeBasis, credits, campus, format]: Array<string> = this._acquireBodyData(splitByTableRow[1]);
+            const classes: Array<Class> = this._acquireTableData(splitByTableRow.slice(3));
 
             if(!(code in coursesFinal)) {
                 coursesFinal[code] = {

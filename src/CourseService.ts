@@ -4,16 +4,24 @@ import CourseAcquisitionUtility from "./CourseAcquisitionUtility.js";
 
 class CourseService {
 
-    private term: string | undefined;
-
     private courseAcquisitionUtility: CourseAcquisitionUtility;
 
     constructor(courseAcquisitionUtility: CourseAcquisitionUtility) {
         this.courseAcquisitionUtility = courseAcquisitionUtility;
     }
 
-    async _getCoursesPromise(): Promise<string> {
-        let response = await fetch(COURSE_URI, {
+    /*
+     * Returns Promise of courses raw html.<br>
+     *
+     * Headers adapted from actual POST request used by Oscar.
+     *
+     * @since   1.0.0
+     * @access  private
+     * @param   {string}            term    Term to get courses for.
+     * @return  {Promise<string>}           Promise of courses raw html.
+     */
+    async _getCoursesPromise(term: string): Promise<string> {
+        let response: Response = await fetch(COURSE_URI, {
             method: "POST",
             headers: {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -31,13 +39,23 @@ class CourseService {
                 'Upgrade-Insecure-Requests': '1',
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36'
             },
-            body: this._getFormData()
+            body: this._getFormData(term)
         })
         return response.text();
     }
 
-    _getFormData(): string {
-        let baseForm: any = {
+    /*
+     * Returns request FormData as encoded string.<br>
+     *
+     * Key/value combinations adapted from actual POST request used by Oscar.
+     *
+     * @since   1.0.0
+     * @access  private
+     * @param   {string}    term    Term to create FormData for.
+     * @return  {string}            Encoded Formdata body.
+     */
+    _getFormData(term: string): string {
+        let baseForm: Record<string, string> = {
             sel_subj: 'dummy',
             sel_day: 'dummy',
             sel_schd: 'dummy',
@@ -49,8 +67,8 @@ class CourseService {
             sel_ptrm: 'dummy',
             sel_attr: 'dummy'
         }
-        let form: any = {
-            term_in: this.term,
+        let form: Record<string, string> = {
+            term_in: term,
             sel_subj: '',
             sel_crse: '',
             sel_title: '',
@@ -73,9 +91,16 @@ class CourseService {
             .flatMap(key => `${key}=${encodeURIComponent(form[key])}`).join("&")].join("&");
     }
 
+    /*
+     * Returns Promise representing Record of all courses for given term.
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   {string}                                            term    Term to get course Record for.
+     * @return  {Promise<Record<string, Record<string, Object>>>}           Record Promise for all courses.
+     */
     async getCourses(term: string): Promise<Record<string, Record<string, Object>>> {
-        this.term = term;
-        let coursesRawHtml: string = await this._getCoursesPromise();
+        let coursesRawHtml: string = await this._getCoursesPromise(term);
 
         return this.courseAcquisitionUtility.getAllCourses(coursesRawHtml);
     }

@@ -7,9 +7,9 @@ let termService: TermService;
 let getTermsPromiseStub: SinonStub;
 sinon.useFakeTimers(new Date(2020, 8, 1));
 
-let VALID_TERM: string = "202008";
-let INVALID_TERM: string = "999999";
-let PAST_TERM: string = "199901";
+const VALID_TERM: string = "202008";
+const INVALID_TERM: string = "999999";
+const PAST_TERM: string = "199901";
 
 test.beforeEach(() => {
     termService = new TermService();

@@ -63,7 +63,9 @@ class CourseAcquisitionUtility {
         let matchingAttributes: Record<string, string> = {};
         let match = bodyAttributes.next();
         while(!match.done) {
-            matchingAttributes[match.value[1]] = match.value[2];
+            matchingAttributes[match.value[1]] = match.value[2]
+                .split(',')
+                .flatMap((name: string) => name.replace(/\(\w\)/g, '').replace(/\s\s+/g, ' ').trim()).join(',');
             match = bodyAttributes.next();
         }
 
@@ -90,10 +92,14 @@ class CourseAcquisitionUtility {
      */
     _acquireTableData(tableElements: Array<string>): Array<Class> {
         return tableElements.flatMap((tableElement: string) => {
-            const [, classTime, classSchedule, classLocation, classDateRange, ,instructorName] = tableElement
+            let [, classTime, classSchedule, classLocation, classDateRange, ,instructorName] = tableElement
                 .split('\n')
                 .slice(0, 7)
                 .flatMap((columnHtml: string) => columnHtml.replace(/<\/?[^>]+(>|$)/g, ''))
+
+            instructorName = instructorName
+                .split(',')
+                .flatMap((name: string) => name.replace(/\(\w\)/g, '').replace(/\s\s+/g, ' ').trim()).join(',');
 
             const emailMatches = tableElement.matchAll(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/g);
             let emails = [];
@@ -144,7 +150,7 @@ class CourseAcquisitionUtility {
             }
             coursesFinal[code].sections[section] = new Course()
                 .setRegistrationNumber(registrationNumber)
-                .setAttributes(attributes)
+                .setAttributes(attributes.split(',').flatMap((attribute: string) => attribute.trim()))
                 .setCredits(parseInt(credits))
                 .setGradeBasis(gradeBasis)
                 .setCampus(campus)

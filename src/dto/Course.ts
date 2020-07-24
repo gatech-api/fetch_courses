@@ -3,7 +3,7 @@ import Class from "./Class.js";
 
 class Course {
     public registrationNumber: string | undefined;
-    public attributes: string | undefined;
+    public attributes: Array<string> | undefined;
     public credits: number | undefined;
     public gradeBasis: string | undefined;
     public campus: string | undefined;
@@ -15,7 +15,7 @@ class Course {
         return this;
     }
 
-    setAttributes(attributes: string): Course {
+    setAttributes(attributes: Array<string>): Course {
         this.attributes = attributes;
         return this;
     }

@@ -1,9 +1,16 @@
 import fetch from 'isomorphic-fetch';
-import {COURSE_URI} from "../config.js";
+import { COURSE_URI } from "../config.js";
+import CourseAcquisitionUtility from "./CourseAcquisitionUtility.js";
 
 class CourseService {
 
-    private term: string = "";
+    private term: string | undefined;
+
+    private courseAcquisitionUtility: CourseAcquisitionUtility;
+
+    constructor(courseAcquisitionUtility: CourseAcquisitionUtility) {
+        this.courseAcquisitionUtility = courseAcquisitionUtility;
+    }
 
     async _getCoursesPromise(): Promise<string> {
         let response = await fetch(COURSE_URI, {
@@ -66,14 +73,11 @@ class CourseService {
             .flatMap(key => `${key}=${encodeURIComponent(form[key])}`).join("&")].join("&");
     }
 
-    setTerm(term: string): void {
+    async getCourses(term: string): Promise<Record<string, Record<string, Object>>> {
         this.term = term;
-    }
-
-    async getCourses() {
         let coursesRawHtml: string = await this._getCoursesPromise();
 
-        console.log(coursesRawHtml);
+        return this.courseAcquisitionUtility.getAllCourses(coursesRawHtml);
     }
 }
 

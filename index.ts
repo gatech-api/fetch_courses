@@ -1,5 +1,6 @@
 import TermService from './src/TermService.js'
 import CourseService from "./src/CourseService.js";
+import CourseAcquisitionUtility from "./src/CourseAcquisitionUtility.js";
 
 
 class Index {
@@ -16,15 +17,22 @@ class Index {
 
     init() {
         this.termService.getCurrentTerm()
-            .then(term => {
-                console.info(`Using term ${term}`)
-                this.courseService.setTerm(term);
-                this.courseService.getCourses();
-            })
-            .catch(e => console.error(e));
+            .then((term: string) => {
+
+                console.info(`Using term ${term}...`)
+
+                this.courseService.getCourses(term)
+                    .then((courses: Record<string, Record<string, Object>>) => {
+
+                        console.info(`Publishing ${Object.keys(courses).length} courses...`);
+
+                        let json = JSON.stringify(courses);
+                        console.log(json);
+                    }).catch(e => console.error(e));
+            }).catch(e => console.error(e));
     }
 }
 
 new Index(
     new TermService(),
-    new CourseService()).init();
+    new CourseService(new CourseAcquisitionUtility())).init();

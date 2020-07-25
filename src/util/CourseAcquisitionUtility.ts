@@ -1,6 +1,6 @@
-import Course from "./dto/Course.js";
-import Class from "./dto/Class.js";
-import Instructor from "./dto/Instructor.js";
+import Course from "../dto/Course.js";
+import Class from "../dto/Class.js";
+import Instructor from "../dto/Instructor.js";
 
 class CourseAcquisitionUtility {
 
@@ -101,6 +101,8 @@ class CourseAcquisitionUtility {
                 .split(',')
                 .flatMap((name: string) => name.replace(/\(\w\)/g, '').replace(/\s\s+/g, ' ').trim()).join(',');
 
+            classSchedule = classSchedule.replace("&nbsp;", "");
+
             const emailMatches: IterableIterator<RegExpMatchArray> = tableElement.matchAll(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/g);
             let emails: Array<string> = [];
             let match: IteratorResult<RegExpMatchArray> = emailMatches.next();
@@ -126,9 +128,9 @@ class CourseAcquisitionUtility {
      * @since   1.0.0
      * @access  public
      * @param   {string}                                    data    Raw course html.
-     * @return  {Record<string, Record<string, Object>>}            Course Record.
+     * @return  {Record<string, Record<string, any>>}               Course Record.
      */
-    public getAllCourses(data: string): Record<string, Record<string, Object>> {
+    public getAllCourses(data: string): Record<string, Record<string, any>> {
         const leftBound: number = data.indexOf('<caption class="captiontext">Sections Found</caption>');
         const rightBound: number = data.lastIndexOf('<table  CLASS="datadisplaytable" summary="This is for formatting of the bottom links." WIDTH="50%">');
         const coursesRaw: Array<string> = data.slice(leftBound, rightBound).split('<tr>\n<th CLASS="ddtitle" scope="colgroup" >').slice(1);

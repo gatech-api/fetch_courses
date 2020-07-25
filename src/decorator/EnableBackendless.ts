@@ -11,22 +11,19 @@ function _verifyEnvironmentVariable(variable: string): string {
     }
 }
 
-function EnableBackendless() {
-    return (target: any) => {
-        let original = target;
+function EnableBackendless(target: any) {
+    // save reference to the original constructor
+    var original = target;
 
-        // new constructor behaviour
-        let f: any = (...args: any[]) => {
-            Backendless.initApp(_verifyEnvironmentVariable("BACKENDLESS_APPLICATION_ID"), _verifyEnvironmentVariable("BACKENDLESS_API_KEY"));
-            // @ts-ignore
-            return original.apply(this, args);
-        }
+    // new constructor behaviour
+    var f : any = function (...args: any[]) {
+        Backendless.initApp(_verifyEnvironmentVariable("BACKENDLESS_APPLICATION_ID"), _verifyEnvironmentVariable("BACKENDLESS_API_KEY"));
+        return new original(...args);
+    }
 
-        // copy prototype so instanceof operator still works
-        f.prototype = original.prototype;
+    f.prototype = original.prototype;
 
-        return f;
-    };
+    return f;
 }
 
 export { Backendless, EnableBackendless }

@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { COURSE_URI } from "../config.js";
-import CourseAcquisitionUtility from "./CourseAcquisitionUtility.js";
+import CourseAcquisitionUtility from "./util/CourseAcquisitionUtility.js";
 
 class CourseService {
 
@@ -97,9 +97,9 @@ class CourseService {
      * @since   1.0.0
      * @access  public
      * @param   {string}                                            term    Term to get course Record for.
-     * @return  {Promise<Record<string, Record<string, Object>>>}           Record Promise for all courses.
+     * @return  {Promise<Record<string, Record<string, any>>>}              Record Promise for all courses.
      */
-    public async getCourses(term: string): Promise<Record<string, Record<string, Object>>> {
+    public async getCourses(term: string): Promise<Record<string, Record<string, any>>> {
         let coursesRawHtml: string = await this._getCoursesPromise(term);
 
         return this.courseAcquisitionUtility.getAllCourses(coursesRawHtml);

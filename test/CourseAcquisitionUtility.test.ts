@@ -1,5 +1,5 @@
 import test from 'ava';
-import CourseAcquisitionUtility from "../src/CourseAcquisitionUtility.js";
+import CourseAcquisitionUtility from "../src/util/CourseAcquisitionUtility.js";
 import Course from "../src/dto/Course.js";
 import Class from "../src/dto/Class.js";
 import Instructor from "../src/dto/Instructor.js";
@@ -34,7 +34,7 @@ test('CourseAcquisitionUtility should return empty Record with empty input', t =
     let data: string = '';
 
     //When
-    let actual: Record<string, Record<string, Object>> = courseAcquisitionUtility.getAllCourses(data);
+    let actual: Record<string, Record<string, any>> = courseAcquisitionUtility.getAllCourses(data);
 
     //Then
     t.falsy(Object.keys(actual).length);
@@ -104,7 +104,7 @@ l"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28 /></a></td>
     `
 
     //When
-    let actual: Record<string, Record<string, Object>> = courseAcquisitionUtility.getAllCourses(data);
+    let actual: Record<string, Record<string, any>> = courseAcquisitionUtility.getAllCourses(data);
 
     //Then
     t.deepEqual(actual, {

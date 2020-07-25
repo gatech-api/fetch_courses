@@ -1,7 +1,8 @@
-require('dotenv').config();
 import TermService from './src/TermService.js'
 import CourseService from "./src/CourseService.js";
-import CourseAcquisitionUtility from "./src/CourseAcquisitionUtility.js";
+import CourseAcquisitionUtility from "./src/util/CourseAcquisitionUtility.js";
+import CourseTransformationUtility from "./src/util/CourseTransformationUtility.js";
+import CourseRepository from "./src/CourseRepository.js";
 
 
 class Index {
@@ -10,10 +11,14 @@ class Index {
 
     private courseService: CourseService;
 
+    private courseRepository: CourseRepository;
+
     constructor(termService: TermService,
-                courseService: CourseService) {
+                courseService: CourseService,
+                courseRepository: CourseRepository) {
         this.termService = termService;
         this.courseService = courseService;
+        this.courseRepository = courseRepository;
     }
 
     init() {
@@ -23,12 +28,11 @@ class Index {
                 console.info(`Using term ${term}...`)
 
                 this.courseService.getCourses(term)
-                    .then((courses: Record<string, Record<string, Object>>) => {
+                    .then((courses: Record<string, Record<string, any>>) => {
 
                         console.info(`Publishing ${Object.keys(courses).length} courses...`);
 
-                        let json = JSON.stringify(courses);
-                        console.log(json);
+                        this.courseRepository.upsertToDb(courses);
                     }).catch(e => console.error(e));
             }).catch(e => console.error(e));
     }
@@ -36,4 +40,5 @@ class Index {
 
 new Index(
     new TermService(),
-    new CourseService(new CourseAcquisitionUtility())).init();
+    new CourseService(new CourseAcquisitionUtility()),
+    new CourseRepository(new CourseTransformationUtility())).init();

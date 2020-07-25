@@ -1,14 +1,14 @@
-import Class from "./Class.js";
+import ClassStratified from "./ClassStratified.js";
 
 
-class Course {
+class CourseStratified {
     private registrationNumber: string | undefined;
     private attributes: Array<string> | undefined;
     private credits: number | undefined;
     private gradeBasis: string | undefined;
     private campus: string | undefined;
     private format: string | undefined;
-    private classes: Array<Class> | undefined;
+    private classes: Array<ClassStratified> | undefined;
 
     public getRegistrationNumber(): string {
         return this.registrationNumber ? this.registrationNumber : "";
@@ -34,44 +34,44 @@ class Course {
         return this.format ? this.format : "";
     }
 
-    public getClasses(): Array<Class> {
+    public getClasses(): Array<ClassStratified> {
         return this.classes ? this.classes : [];
     }
 
-    public setRegistrationNumber(registrationNumber: string): Course {
+    public setRegistrationNumber(registrationNumber: string): CourseStratified {
         this.registrationNumber = registrationNumber;
         return this;
     }
 
-    public setAttributes(attributes: Array<string>): Course {
+    public setAttributes(attributes: Array<string>): CourseStratified {
         this.attributes = attributes;
         return this;
     }
 
-    public setCredits(credits: number): Course {
+    public setCredits(credits: number): CourseStratified {
         this.credits = credits;
         return this;
     }
 
-    public setGradeBasis(gradeBasis: string): Course {
+    public setGradeBasis(gradeBasis: string): CourseStratified {
         this.gradeBasis = gradeBasis;
         return this;
     }
 
-    public setCampus(campus: string): Course {
+    public setCampus(campus: string): CourseStratified {
         this.campus = campus;
         return this;
     }
     
-    public setClasses(classes: Array<Class>): Course {
+    public setClasses(classes: Array<ClassStratified>): CourseStratified {
         this.classes = classes;
         return this;
     }
 
-    public setFormat(format: string): Course {
+    public setFormat(format: string): CourseStratified {
         this.format = format;
         return this;
     }
 }
 
-export default Course;
+export default CourseStratified;

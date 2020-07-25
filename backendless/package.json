@@ -1,0 +1,14 @@
+{
+  "name": "fetch_courses-api-service",
+  "version": "1.0.0",
+  "author": "",
+  "description": "Backend API for course data",
+  "scripts": {
+    "dev": "coderunner debug",
+    "deploy": "coderunner deploy --quiet &> /dev/null"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "backendless-coderunner": "^6.0.0"
+  }
+}

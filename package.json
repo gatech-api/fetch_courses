@@ -4,8 +4,8 @@
   "description": "Asynchronous batch processing for gatech course data",
   "main": "target/index.js",
   "scripts": {
-    "start": "npm run build && node ./target/index.js",
-    "dev": "npm run build && node -r dotenv/config ./target/index.js",
+    "start": "npm run build && node ./target/src/index.js",
+    "dev": "npm run build && node -r dotenv/config ./target/src/index.js",
     "build": "rm -rf target && tsc",
     "test": "nyc ava",
     "tsc": "tsc",
@@ -26,6 +26,7 @@
     "@types/node": "^14.0.26",
     "@types/sinon": "^9.0.4",
     "ava": "^3.10.1",
+    "backendless-coderunner": "^6.0.2",
     "nyc": "^15.1.0",
     "sinon": "^9.0.2",
     "typescript": "^3.9.7"

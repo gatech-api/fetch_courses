@@ -1,6 +1,6 @@
 import Instructor from "./Instructor.js";
 
-class Class {
+class ClassStratified {
     private time: string | undefined;
     private schedule: string | undefined;
     private location: string | undefined;
@@ -27,30 +27,30 @@ class Class {
         return this.instructor ? this.instructor : new Instructor();
     }
 
-    public setTime(time: string): Class {
+    public setTime(time: string): ClassStratified {
         this.time = time;
         return this;
     }
     
-    public setSchedule(schedule: string): Class {
+    public setSchedule(schedule: string): ClassStratified {
         this.schedule = schedule;
         return this;
     }
 
-    public setLocation(location: string): Class {
+    public setLocation(location: string): ClassStratified {
         this.location = location;
         return this;
     }
 
-    public setDateRange(dateRange: string): Class {
+    public setDateRange(dateRange: string): ClassStratified {
         this.dateRange = dateRange;
         return this;
     }
 
-    public setInstructor(instructor: Instructor): Class {
+    public setInstructor(instructor: Instructor): ClassStratified {
         this.instructor = instructor;
         return this;
     }
 }
 
-export default Class;
+export default ClassStratified;

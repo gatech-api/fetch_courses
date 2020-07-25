@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { COURSE_URI } from "../config.js";
-import CourseAcquisitionUtility from "./util/CourseAcquisitionUtility.js";
+import CourseAcquisitionUtility from "../util/CourseAcquisitionUtility.js";
 
 class CourseService {
 

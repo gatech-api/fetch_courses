@@ -5,3 +5,4 @@ target/
 .nyc_output/
 coverage/
 .env
+coderunner.json

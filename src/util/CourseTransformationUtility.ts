@@ -1,20 +1,20 @@
-import CourseRow from "../dao/CourseRow.js";
-import Course from "../dto/Course";
-import Class from "../dto/Class";
+import Courses from "../dao/Courses.js";
+import CourseStratified from "../dto/CourseStratified";
+import ClassStratified from "../dto/ClassStratified";
 
 class CourseTransformationUtility {
 
-    public transformToFlatStructure(courses: Record<string, Record<string, any>>): Array<CourseRow> {
-        let flatCourses: Array<CourseRow> = [];
+    public transformToFlatStructure(courses: Record<string, Record<string, any>>): Array<Courses> {
+        let flatCourses: Array<Courses> = [];
 
         for (let courseCode in courses) {
             let currentCourseMeta: Record<string, any> = courses[courseCode];
             let courseName: string = <string>currentCourseMeta.name;
 
             for(let courseSection in currentCourseMeta.sections) {
-                let currentCourse: Course = currentCourseMeta.sections[courseSection];
-                currentCourse.getClasses().forEach((courseClass: Class) => {
-                    flatCourses.push(new CourseRow()
+                let currentCourse: CourseStratified = currentCourseMeta.sections[courseSection];
+                currentCourse.getClasses().forEach((courseClass: ClassStratified) => {
+                    flatCourses.push(new Courses()
                         .setCode(courseCode)
                         .setName(courseName)
                         .setSection(courseSection)

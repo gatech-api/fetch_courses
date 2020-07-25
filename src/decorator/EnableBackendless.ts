@@ -13,10 +13,10 @@ function _verifyEnvironmentVariable(variable: string): string {
 
 function EnableBackendless(target: any) {
     // save reference to the original constructor
-    var original = target;
+    let original = target;
 
     // new constructor behaviour
-    var f : any = function (...args: any[]) {
+    let f : any = function (...args: any[]) {
         Backendless.initApp(_verifyEnvironmentVariable("BACKENDLESS_APPLICATION_ID"), _verifyEnvironmentVariable("BACKENDLESS_API_KEY"));
         return new original(...args);
     }

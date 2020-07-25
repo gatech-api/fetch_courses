@@ -1,7 +1,7 @@
 import test from 'ava';
 import CourseAcquisitionUtility from "../src/util/CourseAcquisitionUtility.js";
-import Course from "../src/dto/Course.js";
-import Class from "../src/dto/Class.js";
+import CourseStratified from "../src/dto/CourseStratified.js";
+import ClassStratified from "../src/dto/ClassStratified.js";
 import Instructor from "../src/dto/Instructor.js";
 
 
@@ -12,7 +12,7 @@ const CRN_A: string = "92549";
 const CODE_A: string = "WOLO 1801";
 const SECTION_A: string = "A";
 
-const ATTRIBUTES_A: string = "Hybrid Course";
+const ATTRIBUTES_A: string = "Hybrid CourseStratified";
 const CAMPUS_A: string = "Georgia Tech-Atlanta *";
 const FORMAT_A: string = "Lecture*";
 const CREDITS_A: string = "1.000";
@@ -111,7 +111,7 @@ l"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28 /></a></td>
         [CODE_A]: {
             name: NAME_A,
             sections: {
-                [SECTION_A]: new Course()
+                [SECTION_A]: new CourseStratified()
                     .setRegistrationNumber(CRN_A)
                     .setAttributes([ATTRIBUTES_A])
                     .setCredits(parseInt(CREDITS_A))
@@ -119,7 +119,7 @@ l"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28 /></a></td>
                     .setCampus(CAMPUS_A)
                     .setFormat(FORMAT_A)
                     .setClasses([
-                        new Class()
+                        new ClassStratified()
                             .setTime(TIME_A)
                             .setSchedule(SCHEDULE_A)
                             .setLocation(LOCATION_A)

@@ -7,12 +7,3 @@ jobs:
     - stage: Test
       node_js: node
       script: npm run bld:test
-
-    - stage: Deploy Backend
-      node_js: node
-      script:
-        - cd backendless/
-        - npm install
-        - envsubst \$BACKENDLESS_APPLICATION_ID,\$CODERUNNER_API_KEY < ./coderunner.template.json > coderunner.json
-        - npm run deploy
-        - cd ..

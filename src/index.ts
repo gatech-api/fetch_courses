@@ -32,7 +32,8 @@ class Index {
 
                         console.info(`Publishing ${Object.keys(courses).length} courses...`);
 
-                        this.courseRepository.upsertToDb(courses);
+                        this.courseRepository.upsertToDb(courses)
+                            .then(() => console.info("Done."));
                     }).catch(e => console.error(e));
             }).catch(e => console.error(e));
     }

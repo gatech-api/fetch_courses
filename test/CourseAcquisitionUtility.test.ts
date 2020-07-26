@@ -12,7 +12,7 @@ const CRN_A: string = "92549";
 const CODE_A: string = "WOLO 1801";
 const SECTION_A: string = "A";
 
-const ATTRIBUTES_A: string = "Hybrid CourseStratified";
+const ATTRIBUTES_A: string = "Hybrid Course";
 const CAMPUS_A: string = "Georgia Tech-Atlanta *";
 const FORMAT_A: string = "Lecture*";
 const CREDITS_A: string = "1.000";
@@ -40,7 +40,7 @@ test('CourseAcquisitionUtility should return empty Record with empty input', t =
     t.falsy(Object.keys(actual).length);
 })
 
-test('CourseAcquisitionUtility should return correct Record of Courses for valid input', t => {
+test('CourseAcquisitionUtility should return correct Record of Course for valid input', t => {
     //Given
     let data: string = `
 <caption class="captiontext">Sections Found</caption>

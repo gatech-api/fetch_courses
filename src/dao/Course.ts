@@ -1,4 +1,4 @@
-class Courses {
+class Course {
     private code: string | undefined;
     private name: string | undefined;
     private section: string | undefined;
@@ -23,80 +23,50 @@ class Courses {
         return this.attributes ? this.attributes : "";
     }
 
-    public setCode(code: string): Courses {
+    public setCode(code: string): Course {
         this.code = code;
         return this;
     }
 
-    public setName(name: string): Courses {
+    public setName(name: string): Course {
         this.name = name;
         return this;
     }
 
-    public setSection(section: string): Courses {
+    public setSection(section: string): Course {
         this.section = section;
         return this;
     }
 
-    public setRegistrationNumber(registrationNumber: string): Courses {
+    public setRegistrationNumber(registrationNumber: string): Course {
         this.registrationNumber = registrationNumber;
         return this;
     }
 
-    public setAttributes(attributes: string): Courses {
+    public setAttributes(attributes: string): Course {
         this.attributes = attributes;
         return this;
     }
 
-    public setCredits(credits: number): Courses {
+    public setCredits(credits: number): Course {
         this.credits = credits;
         return this;
     }
 
-    public setGradeBasis(gradeBasis: string): Courses {
+    public setGradeBasis(gradeBasis: string): Course {
         this.gradeBasis = gradeBasis;
         return this;
     }
 
-    public setCampus(campus: string): Courses {
+    public setCampus(campus: string): Course {
         this.campus = campus;
         return this;
     }
 
-    public setFormat(format: string): Courses {
+    public setFormat(format: string): Course {
         this.format = format;
-        return this;
-    }
-
-    public setClassTime(time: string): Courses {
-        this.classTime = time;
-        return this;
-    }
-
-    public setClassSchedule(schedule: string): Courses {
-        this.classSchedule = schedule;
-        return this;
-    }
-
-    public setClassLocation(location: string): Courses {
-        this.classLocation = location;
-        return this;
-    }
-
-    public setClassDateRange(dateRange: string): Courses {
-        this.classDateRange = dateRange;
-        return this;
-    }
-
-    public setInstructorName(name: string): Courses {
-        this.instructorName = name;
-        return this;
-    }
-
-    public setInstructorEmail(email: string): Courses {
-        this.instructorEmail = email;
         return this;
     }
 }
 
-export default Courses;
+export default Course;

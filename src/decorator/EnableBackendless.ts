@@ -11,13 +11,17 @@ function _verifyEnvironmentVariable(variable: string): string {
     }
 }
 
+const BACKENDLESS_APPLICATION_ID: string = _verifyEnvironmentVariable("BACKENDLESS_APPLICATION_ID");
+
+const BACKENDLESS_API_KEY: string = _verifyEnvironmentVariable("BACKENDLESS_API_KEY");
+
 function EnableBackendless(target: any) {
     // save reference to the original constructor
     let original = target;
 
     // new constructor behaviour
     let f : any = function (...args: any[]) {
-        Backendless.initApp(_verifyEnvironmentVariable("BACKENDLESS_APPLICATION_ID"), _verifyEnvironmentVariable("BACKENDLESS_API_KEY"));
+        Backendless.initApp(BACKENDLESS_APPLICATION_ID, BACKENDLESS_API_KEY);
         return new original(...args);
     }
 
@@ -26,4 +30,4 @@ function EnableBackendless(target: any) {
     return f;
 }
 
-export { Backendless, EnableBackendless }
+export { Backendless, EnableBackendless, BACKENDLESS_APPLICATION_ID, BACKENDLESS_API_KEY }

@@ -6,7 +6,7 @@ class CourseAcquisitionUtility {
 
     private SEPARATOR: string = " - ";
 
-    /*
+    /**
      * Returns match value with control for no match.
      *
      * @since   1.0.0
@@ -20,7 +20,7 @@ class CourseAcquisitionUtility {
         return match ? match[1] : "";
     }
 
-    /*
+    /**
      * Returns array of string containing course name, registration number, code, and section.<br>
      *
      * Using custom regex, one matching group containing all relevant information in the header is derived.<br>
@@ -49,7 +49,7 @@ class CourseAcquisitionUtility {
         return [name, registrationNumber, code, section];
     }
 
-    /*
+    /**
      * Returns array of string containing course attributes, gradeBasis, credits, campus, and format.
      *
      * @since   1.0.0
@@ -79,10 +79,10 @@ class CourseAcquisitionUtility {
         return [attributes, gradeBasis, credits, campus, format];
     }
 
-    /*
+    /**
      * Returns array of ClassStratified containing course attributes time, schedule, location, dateRange, instructorName, instructorEmail.<br>
      *
-     * Each table row of class metadata is flatmapped into an Array of Courses by doing an elementary html strip and
+     * Each table row of class metadata is flatmapped into an Array of Course by doing an elementary html strip and
      * some more nuanced regexp to find instructor email (which is inside the html).<br>
      *
      * @since   1.0.0
@@ -122,7 +122,7 @@ class CourseAcquisitionUtility {
         })
     }
 
-    /*
+    /**
      * Returns all course data in organized Record format.
      *
      * @since   1.0.0

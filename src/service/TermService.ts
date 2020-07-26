@@ -4,7 +4,7 @@ import { TERMS_CATALOG_URI } from '../config.js'
 
 class TermService {
 
-    /*
+    /**
      * Returns Promise of terms raw html.
      *
      * @since   1.0.0
@@ -16,7 +16,7 @@ class TermService {
         return response.text();
     }
 
-    /*
+    /**
      * Returns boolean representing whether input date string is valid.
      *
      * @since   1.0.0
@@ -29,7 +29,7 @@ class TermService {
         return 1 <= month && month <= 12;
     }
 
-    /*
+    /**
      * Returns number of days between two Dates, or MAX_VALUE if end date is before start date.
      *
      * @since   1.0.0
@@ -47,7 +47,7 @@ class TermService {
         }
     }
 
-    /*
+    /**
      * Returns latest term based on current date.<br>
      *
      * For all term dates that start <strong>after</strong> the current date, find the nearest one.
@@ -78,7 +78,7 @@ class TermService {
         }
     }
 
-    /*
+    /**
      * Returns Promise representing the current term.
      *
      * @since   1.0.0

@@ -23,4 +23,4 @@ For local development, you will need to:
    BACKENDLESS_API_KEY=
    ```
 
-4. Run `npm run dev` to start course collection process.
+4. Run `npm run dev` to initiate course collection process.

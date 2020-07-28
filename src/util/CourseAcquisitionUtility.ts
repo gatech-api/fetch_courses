@@ -1,12 +1,12 @@
-import Course from "../dto/Course.js";
-import Class from "../dto/Class.js";
+import CourseStratified from "../dto/CourseStratified.js";
+import ClassStratified from "../dto/ClassStratified.js";
 import Instructor from "../dto/Instructor.js";
 
 class CourseAcquisitionUtility {
 
     private SEPARATOR: string = " - ";
 
-    /*
+    /**
      * Returns match value with control for no match.
      *
      * @since   1.0.0
@@ -20,7 +20,7 @@ class CourseAcquisitionUtility {
         return match ? match[1] : "";
     }
 
-    /*
+    /**
      * Returns array of string containing course name, registration number, code, and section.<br>
      *
      * Using custom regex, one matching group containing all relevant information in the header is derived.<br>
@@ -49,7 +49,7 @@ class CourseAcquisitionUtility {
         return [name, registrationNumber, code, section];
     }
 
-    /*
+    /**
      * Returns array of string containing course attributes, gradeBasis, credits, campus, and format.
      *
      * @since   1.0.0
@@ -79,18 +79,18 @@ class CourseAcquisitionUtility {
         return [attributes, gradeBasis, credits, campus, format];
     }
 
-    /*
-     * Returns array of Class containing course attributes time, schedule, location, dateRange, instructorName, instructorEmail.<br>
+    /**
+     * Returns array of ClassStratified containing course attributes time, schedule, location, dateRange, instructorName, instructorEmail.<br>
      *
-     * Each table row of class metadata is flatmapped into an Array of Courses by doing an elementary html strip and
+     * Each table row of class metadata is flatmapped into an Array of Course by doing an elementary html strip and
      * some more nuanced regexp to find instructor email (which is inside the html).<br>
      *
      * @since   1.0.0
      * @access  private
      * @param   {Array<string>} tableElements   Raw html of course metadata.
-     * @return  {Array<Class>}                  Array of Class.
+     * @return  {Array<ClassStratified>}                  Array of ClassStratified.
      */
-    private _acquireTableData(tableElements: Array<string>): Array<Class> {
+    private _acquireTableData(tableElements: Array<string>): Array<ClassStratified> {
         return tableElements.flatMap((tableElement: string) => {
             let [, classTime, classSchedule, classLocation, classDateRange, ,instructorName]: Array<string> = tableElement
                 .split('\n')
@@ -111,7 +111,7 @@ class CourseAcquisitionUtility {
                 match = emailMatches.next();
             }
             const instructorEmail: string = emails.join(',');
-            return new Class()
+            return new ClassStratified()
                 .setTime(classTime)
                 .setSchedule(classSchedule)
                 .setLocation(classLocation)
@@ -122,13 +122,13 @@ class CourseAcquisitionUtility {
         })
     }
 
-    /*
+    /**
      * Returns all course data in organized Record format.
      *
      * @since   1.0.0
      * @access  public
      * @param   {string}                                    data    Raw course html.
-     * @return  {Record<string, Record<string, any>>}               Course Record.
+     * @return  {Record<string, Record<string, any>>}               CourseStratified Record.
      */
     public getAllCourses(data: string): Record<string, Record<string, any>> {
         const leftBound: number = data.indexOf('<caption class="captiontext">Sections Found</caption>');
@@ -142,7 +142,7 @@ class CourseAcquisitionUtility {
 
             const [name, registrationNumber, code, section]: Array<string> = this._acquireHeaderData(splitByTableRow[0]);
             const [attributes, gradeBasis, credits, campus, format]: Array<string> = this._acquireBodyData(splitByTableRow[1]);
-            const classes: Array<Class> = this._acquireTableData(splitByTableRow.slice(3));
+            const classes: Array<ClassStratified> = this._acquireTableData(splitByTableRow.slice(3));
 
             if(!(code in coursesFinal)) {
                 coursesFinal[code] = {
@@ -150,7 +150,7 @@ class CourseAcquisitionUtility {
                     sections: {}
                 }
             }
-            coursesFinal[code].sections[section] = new Course()
+            coursesFinal[code].sections[section] = new CourseStratified()
                 .setRegistrationNumber(registrationNumber)
                 .setAttributes(attributes.split(',').flatMap((attribute: string) => attribute.trim()))
                 .setCredits(parseInt(credits))

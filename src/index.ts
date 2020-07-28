@@ -1,8 +1,8 @@
-import TermService from './src/TermService.js'
-import CourseService from "./src/CourseService.js";
-import CourseAcquisitionUtility from "./src/util/CourseAcquisitionUtility.js";
-import CourseTransformationUtility from "./src/util/CourseTransformationUtility.js";
-import CourseRepository from "./src/CourseRepository.js";
+import TermService from './service/TermService.js'
+import CourseService from "./service/CourseService.js";
+import CourseAcquisitionUtility from "./util/CourseAcquisitionUtility.js";
+import CourseTransformationUtility from "./util/CourseTransformationUtility.js";
+import CourseRepository from "./repository/CourseRepository.js";
 
 
 class Index {
@@ -32,7 +32,8 @@ class Index {
 
                         console.info(`Publishing ${Object.keys(courses).length} courses...`);
 
-                        this.courseRepository.upsertToDb(courses);
+                        this.courseRepository.upsertToDb(courses)
+                            .then(() => console.info("Done."));
                     }).catch(e => console.error(e));
             }).catch(e => console.error(e));
     }

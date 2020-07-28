@@ -1,8 +1,8 @@
 import test from 'ava';
-import CourseAcquisitionUtility from "../src/util/CourseAcquisitionUtility.js";
-import Course from "../src/dto/Course.js";
-import Class from "../src/dto/Class.js";
-import Instructor from "../src/dto/Instructor.js";
+import CourseAcquisitionUtility from "../../src/util/CourseAcquisitionUtility.js";
+import CourseStratified from "../../src/dto/CourseStratified.js";
+import ClassStratified from "../../src/dto/ClassStratified.js";
+import Instructor from "../../src/dto/Instructor.js";
 
 
 let courseAcquisitionUtility: CourseAcquisitionUtility;
@@ -40,7 +40,7 @@ test('CourseAcquisitionUtility should return empty Record with empty input', t =
     t.falsy(Object.keys(actual).length);
 })
 
-test('CourseAcquisitionUtility should return correct Record of Courses for valid input', t => {
+test('CourseAcquisitionUtility should return correct Record of Course for valid input', t => {
     //Given
     let data: string = `
 <caption class="captiontext">Sections Found</caption>
@@ -111,7 +111,7 @@ l"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28 /></a></td>
         [CODE_A]: {
             name: NAME_A,
             sections: {
-                [SECTION_A]: new Course()
+                [SECTION_A]: new CourseStratified()
                     .setRegistrationNumber(CRN_A)
                     .setAttributes([ATTRIBUTES_A])
                     .setCredits(parseInt(CREDITS_A))
@@ -119,7 +119,7 @@ l"  NAME="web_email" HSPACE=0 VSPACE=0 BORDER=0 HEIGHT=28 WIDTH=28 /></a></td>
                     .setCampus(CAMPUS_A)
                     .setFormat(FORMAT_A)
                     .setClasses([
-                        new Class()
+                        new ClassStratified()
                             .setTime(TIME_A)
                             .setSchedule(SCHEDULE_A)
                             .setLocation(LOCATION_A)

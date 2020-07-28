@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { COURSE_URI } from "../config.js";
-import CourseAcquisitionUtility from "./util/CourseAcquisitionUtility.js";
+import CourseAcquisitionUtility from "../util/CourseAcquisitionUtility.js";
 
 class CourseService {
 
@@ -10,7 +10,7 @@ class CourseService {
         this.courseAcquisitionUtility = courseAcquisitionUtility;
     }
 
-    /*
+    /**
      * Returns Promise of courses raw html.<br>
      *
      * Headers adapted from actual POST request used by Oscar.
@@ -44,7 +44,7 @@ class CourseService {
         return response.text();
     }
 
-    /*
+    /**
      * Returns request FormData as encoded string.<br>
      *
      * Key/value combinations adapted from actual POST request used by Oscar.

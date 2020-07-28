@@ -1,8 +1,8 @@
 import test from 'ava';
-import CourseAcquisitionUtility from "../src/util/CourseAcquisitionUtility.js";
-import CourseStratified from "../src/dto/CourseStratified.js";
-import ClassStratified from "../src/dto/ClassStratified.js";
-import Instructor from "../src/dto/Instructor.js";
+import CourseAcquisitionUtility from "../../src/util/CourseAcquisitionUtility.js";
+import CourseStratified from "../../src/dto/CourseStratified.js";
+import ClassStratified from "../../src/dto/ClassStratified.js";
+import Instructor from "../../src/dto/Instructor.js";
 
 
 let courseAcquisitionUtility: CourseAcquisitionUtility;

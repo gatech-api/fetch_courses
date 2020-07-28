@@ -1,6 +1,6 @@
 import test from 'ava';
 import sinon, {SinonStub} from 'sinon';
-import TermService from "../src/service/TermService.js";
+import TermService from "../../src/service/TermService.js";
 
 
 let termService: TermService;

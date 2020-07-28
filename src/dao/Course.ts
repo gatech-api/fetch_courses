@@ -8,19 +8,9 @@ class Course {
     private gradeBasis: string | undefined;
     private campus: string | undefined;
     private format: string | undefined;
-    private classTime: string | undefined;
-    private classSchedule: string | undefined;
-    private classLocation: string | undefined;
-    private classDateRange: string | undefined;
-    private instructorName: string | undefined;
-    private instructorEmail: string | undefined;
 
     public getRegistrationNumber(): string {
         return this.registrationNumber ? this.registrationNumber : "";
-    }
-
-    public getAttributes(): string {
-        return this.attributes ? this.attributes : "";
     }
 
     public setCode(code: string): Course {

@@ -16,6 +16,12 @@ class CourseTransformationUtility {
         return this.flatClasses ? this.flatClasses : [];
     }
 
+    /**
+     * Void process that saves both flat course and class mappings as class attributes for subsequent reference
+     *
+     * @since   1.0.0
+     * @param   courses
+     */
     public transformToFlatStructure(courses: Record<string, Record<string, any>>): void {
         this.flatCourses = [];
         this.flatClasses = [];

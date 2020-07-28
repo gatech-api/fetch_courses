@@ -1,3 +1,4 @@
+/* Copyright © 2020 Gatech-API - All Rights Reserved. Subject to terms of the PolyForm Noncommercial License. */
 import ClassStratified from "./ClassStratified.js";
 
 

@@ -1,3 +1,4 @@
+/* Copyright © 2020 Gatech-API - All Rights Reserved. Subject to terms of the PolyForm Noncommercial License. */
 import TermService from './service/TermService.js'
 import CourseService from "./service/CourseService.js";
 import CourseAcquisitionUtility from "./util/CourseAcquisitionUtility.js";

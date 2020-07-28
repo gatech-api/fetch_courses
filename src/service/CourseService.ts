@@ -1,3 +1,4 @@
+/* Copyright © 2020 Gatech-API - All Rights Reserved. Subject to terms of the PolyForm Noncommercial License. */
 import fetch from 'isomorphic-fetch';
 import { COURSE_URI } from "../config.js";
 import CourseAcquisitionUtility from "../util/CourseAcquisitionUtility.js";

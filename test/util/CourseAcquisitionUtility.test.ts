@@ -1,3 +1,4 @@
+/* Copyright © 2020 Gatech-API - All Rights Reserved. Subject to terms of the PolyForm Noncommercial License. */
 import test from 'ava';
 import CourseAcquisitionUtility from "../../src/util/CourseAcquisitionUtility.js";
 import CourseStratified from "../../src/dto/CourseStratified.js";

@@ -1,3 +1,5 @@
+/* Copyright © 2020 Gatech-API - All Rights Reserved. Subject to terms of the PolyForm Noncommercial License. */
+
 import Backendless from 'backendless';
 import process from "process";
 

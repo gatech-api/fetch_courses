@@ -1,3 +1,4 @@
+/* Copyright © 2020 Gatech-API - All Rights Reserved. Subject to terms of the PolyForm Noncommercial License. */
 import CourseStratified from "../dto/CourseStratified.js";
 import ClassStratified from "../dto/ClassStratified.js";
 import Instructor from "../dto/Instructor.js";

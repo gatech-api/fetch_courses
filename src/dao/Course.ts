@@ -1,3 +1,5 @@
+/* Copyright © 2020 Gatech-API - All Rights Reserved. Subject to terms of the PolyForm Noncommercial License. */
+
 class Course {
     private code: string | undefined;
     private name: string | undefined;

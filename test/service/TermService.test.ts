@@ -1,3 +1,4 @@
+/* Copyright © 2020 Gatech-API - All Rights Reserved. Subject to terms of the PolyForm Noncommercial License. */
 import test from 'ava';
 import sinon, {SinonStub} from 'sinon';
 import TermService from "../../src/service/TermService.js";
